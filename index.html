@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>Your Weather Art</title>
+<meta name="viewport" content="width=device-width">
+<link href='http://fonts.googleapis.com/css?family=Londrina+Shadow' rel='stylesheet' type='text/css'>
+<link href="styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<button class="js-geolocation">Get Weather and Art</button>
+<!-- Docs at http://http://simpleweatherjs.com -->
+<div id="heading" style="display: none;"></div>
+<div class="cant-geolocate" style="display: none;">Your browser won't tell me where you are, so I can't help you.  Sorry.</div>
+<div id="art">
+
+	<div id="weather" style="display: none;"></div>
+	<div id="art_info" style="display: none;"></div>
+	<div id="loading" style="display: none;"><p>Getting Art<br/> <img src="ajax-loader.gif"></p></div>
+</div>
+
+
+	
+
+	<div id="ch_output" style="display: none;"><p>Your Weather Art:</p></div>
+
+<div id="allfields" style="display: none;"></div>
+<div id="about">
+This page uses:
+<ul>
+<li> The <a href="http://simpleweatherjs.com/">Simple Weather</a> jQuery plugin by James Fleeting.</li>
+<li> The Cooper-Hewitt Museum's <a href="https://collection.cooperhewitt.org/api">Collections API</a>. </li>
+</ul>
+
+<script src="js/jquery.js"></script>
+<script src="js/conditions.js"></script>
+<script src="js/jquery.simpleWeather.js"></script>
+<script src="js/weatherart.js"></script>
+
+</body>
+</html>
