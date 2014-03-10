@@ -1,8 +1,8 @@
 /*
-  Docs at http://http://simpleweatherjs.com
+  Styles for weatherart demo.
 
-  Look inspired by http://www.degreees.com/
-  Used for demo purposes.
+  (Some of this CSS is borrowed from http://http://simpleweatherjs.com)
+
 */
 
 body {
@@ -57,16 +57,13 @@ body {
 
 
 
-
 #weather h2 {
- /* font-family: 'Londrina Shadow', cursive;  PROBLEM: this is just border, not filled in */
   margin: 0 0 8px;
   color: #fff;
   font-size: 100px;
   font-weight: 300;
   text-align: center;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  /*text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.15);*/
 }
 
 #weather ul {
@@ -96,7 +93,6 @@ body {
   font-size:15px;
   font-weight:bold;
   font-style:normal;
-  /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
 }
 #art_info a {
     background: #fff;
@@ -140,10 +136,7 @@ button {
   text-decoration:none;
   text-align:center;
   margin: 0 auto;
-/*    height:35px;
-  font-family:Trebuchet MS;
-   width:180px;
-text-shadow:1px 1px 0px #ffffff; */
+
 }.button:hover {
   background-color:#d4d0d4;
 }.button:active {

@@ -5,9 +5,6 @@
  *  somehow related to today's weather, where you are....
  *
  */
-
-
-
 function getWeatherArt(weather) {
 	
 	//alert("in getArt");
@@ -53,7 +50,7 @@ function getWeatherArt(weather) {
 	// Call the museum api
 	$.getJSON(url,
 		function(resp) {
-			 // log each key in the response data
+			 // debugging: log each key in the response data
 			$.each( resp, function( key, value ) {
 				console.log( key + " : " + value );
 			});
@@ -67,14 +64,15 @@ function getWeatherArt(weather) {
 				numObjects = perPage;  // Don't pick an object that's not in the first page 
 			}
 
-			if (numObjects>0) {
+			if (numObjects>0) {  // we got results, let's pick one
 				var pick = Math.floor(Math.random()*numObjects);
 				console.log("Picking Object number "+pick);
 				var yourObject = resp.objects[pick];
 				console.log(JSON.stringify(yourObject));
+
 				var objTitle = yourObject.title;
 		 		var objUrl = yourObject.url;
-		 		ch_out += '<p><a href="' + objUrl + '">' + objTitle + '</a></p>\n';
+				artInfo = '<p><a href="' + objUrl + '">' + objTitle + '</a></p>\n';
 
 		 		// console.log(JSON.stringify(yourObject.images[0].b));
 		 		// $.each(yourObject.images[0], function(key, value) {
@@ -83,19 +81,22 @@ function getWeatherArt(weather) {
 		 		// 		console.log("Primary url = "+value.url);
 		 		// 	}
 		 		// });
+			// For simplicity I'm assuming that images[0] is the primary image
+			//  All images seem to have b, n and z entries (full size, thumbnail, and in-between)
+			//  Get the big one, and let the browser reduce it if need be.
 				var imageUrl = yourObject.images[0].b.url;
 				var imageHeight = yourObject.images[0].b.height;
 				$("#art").css('background-image', 'url(' + imageUrl + ')');
-				$("#art").css('height',imageHeight);
+				$("#art").css('height',imageHeight);   // show full height of the image
 
-				artInfo = '<p><a href="' + objUrl + '">' + objTitle + '</a></p>\n';
+
 	 		} else {
 	 			// no objects returned.  Bummer
 	 			artInfo = 'No objects in the Cooper-Hewitt collection matched the current weather.  Try again later.';
 
 	 		}
 	 		$("#loading").hide();
-			$("#ch_output").html(ch_out);	
+	
 
 
 			$("#art_info").html(artInfo);
@@ -107,7 +108,13 @@ function getWeatherArt(weather) {
 		
 }
 
-// Docs at http://simpleweatherjs.com
+
+/* 
+ * The following code borrowed from example code for simpleWeather.js
+ * It gets the user's location, and sends it to the Yahoo Weather api to get the 
+ * current weather (and so much more) for that location
+ */
+
 
 /* Does your browser support geolocation? */
 if ("geolocation" in navigator) {
@@ -132,11 +139,6 @@ function loadWeather(location, woeid) {
     woeid: woeid,
     unit: 'f',
     success: function(weather) {
-    	// default behavior (from sample code)
-      // html = '<h2><i class="icon-'+weather.code+'"></i> '+weather.temp+'&deg;'+weather.units.temp+'</h2>';
-      // html += '<ul><li>'+weather.city+', '+weather.region+'</li>';
-      // html += '<li class="currently">'+weather.currently+'</li>';
-      // html += '<li>'+weather.tempAlt+'&deg;C</li></ul>';  
       
       html = '<h2>'+weather.temp+'&deg;'+weather.units.temp+'</h2>';
       html += '<li class="currently">'+weather.currently+'</li>'; 
@@ -146,7 +148,7 @@ function loadWeather(location, woeid) {
       $("#heading").html("Current "+weather.title);
       $("#heading").show();
 
-      listAllInfo(weather); // debugging -- see all info from yahoo weather
+      // listAllInfo(weather);  // for debugging -- see all info from yahoo weather
 
       getWeatherArt(weather);
     },
@@ -170,7 +172,6 @@ function listAllInfo(weather) {
 	}
 	str += "</ul>";
 
-	//alert (str);
 	$("#allfields").html(str);
     //$("#allfields").show();
 }
